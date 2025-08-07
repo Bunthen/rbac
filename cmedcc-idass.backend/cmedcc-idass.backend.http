@@ -1,0 +1,6 @@
+@cmedcc_idass.backend_HostAddress = http://localhost:5161
+
+GET {{cmedcc_idass.backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
