@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace cmedcc_idass.backend.Controllers;
 
 [ApiController]
-[Route("idass/auth")]
+[Route("api/idass/auth")]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;

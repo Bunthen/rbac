@@ -9,7 +9,7 @@ namespace cmedcc_idass.backend.Controllers;
 
 
 [ApiController]
-[Route("idass/admin")]
+[Route("api/idass/admin")]
 public class AdminController : ControllerBase
 {
     private readonly IAdminService _adminService;
