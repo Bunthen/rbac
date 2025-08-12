@@ -12,11 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var connectionStringAuth =  builder.Configuration.GetConnectionString("AuthConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseSqlServer(connectionString));
+var connectionStringAuth =  builder.Configuration.GetConnectionString("AuthConnectionDev");
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(connectionStringAuth));
 // Add Identity service
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 //Register serivce
-builder.Services.AddScoped<IUserService,UserService>();  //Register User Service
+//builder.Services.AddScoped<IUserService,UserService>();  //Register User Service
 builder.Services.AddScoped<IAuthService, AuthService>(); //Register Auth Service
 builder.Services.AddScoped<IAdminService, AdminService>(); //Register Admin Service
 

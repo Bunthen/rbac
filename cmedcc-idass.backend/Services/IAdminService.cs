@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-
 using cmedcc_idass.backend.Dto;
-using cmedcc_idass.backend.Models;
+// using cmedcc_idass.backend.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace cmedcc_idass.backend.Services;
 
@@ -23,6 +23,7 @@ public interface IAdminService
     // // Assign Role to user
 
     Task<(bool success, string message)> AssignRoleToUser(AssignRoleToUserDto UserRoleDto);
-
+    // Get list user with role
+    //Task<List<UserReadDto>> GetListUserWithRole(string UserId);
 }
 
