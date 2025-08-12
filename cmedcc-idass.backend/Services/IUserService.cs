@@ -8,7 +8,7 @@ namespace cmedcc_idass.backend.Services;
 
 public interface IUserService
 {
-    Task<User>GetUserById(Guid userId);
+    Task<UserUpdateDto>GetUserById(Guid userId);
     Task<User> CreateUser(UserCreateDto userDto);
     Task<User> UpdateUserById(Guid userId, UserUpdateDto userDto);
     Task<User> DeleteUserById(Guid userId);

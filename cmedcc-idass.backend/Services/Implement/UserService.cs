@@ -84,22 +84,27 @@ public class UserService : IUserService
         {
             return null; // User not found
         }
-
         user.IsActive = false;
         await _dbContext.SaveChangesAsync();
         return user;
-
     }
 
 
-    public async Task<User> GetUserById(Guid userId)
+    public async Task<UserUpdateDto> GetUserById(Guid userId)
     {
         var user = await _dbContext.Users.FindAsync(userId);
+
         if (user == null)
         {
             return null; // User not found
         }
-        return user;
+        var result = new UserUpdateDto
+        {
+            Username = user.Username,
+            Email = user.Email,
+            IsActive = user.IsActive
+        };
+        return result;
     }
 
 

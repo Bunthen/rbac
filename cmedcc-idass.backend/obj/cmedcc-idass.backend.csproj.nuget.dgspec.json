@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj": {}
+    "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\rbac\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj": {
+    "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\rbac\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj",
+        "projectUniqueName": "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\rbac\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj",
         "projectName": "cmedcc-idass.backend",
-        "projectPath": "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj",
+        "projectPath": "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\rbac\\cmedcc-idass.backend\\cmedcc-idass.backend.csproj",
         "packagesPath": "C:\\Users\\e.bunthen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\cmedcc-idass.backend\\obj\\",
+        "outputPath": "C:\\Users\\e.bunthen\\DEV\\cmedcc_Idaas\\rbac\\cmedcc-idass.backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,6 +51,14 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.7, )"
