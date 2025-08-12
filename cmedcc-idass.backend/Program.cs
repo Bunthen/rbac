@@ -63,7 +63,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
-
+app.UsePathBase("/cmedcc-idass-backend");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
