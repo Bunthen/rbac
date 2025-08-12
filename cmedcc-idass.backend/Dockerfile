@@ -14,7 +14,7 @@ WORKDIR /src
 # Copy project file and restore dependencies
 COPY cmedcc-idass.backend/cmedcc-idass.backend.csproj ./cmedcc-idass.backend/
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet restore "cmedcc-idass.backend/cmedcc-idass.backend.csproj"
+    dotnet restore "src/cmedcc-idass.backend/cmedcc-idass.backend.csproj"
 
 # Copy the rest of the source code and build
 COPY . .
