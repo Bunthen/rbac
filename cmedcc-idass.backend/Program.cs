@@ -70,7 +70,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseSwagger();
     app.UseDeveloperExceptionPage();
-    app.UsePathBase("/cmedcc-idass-backend");
+    app.UsePathBase("/cmedcc-idaas-backend");
 }
 //Middleware registering
 //app.UseMiddleware<ApiKeyMiddleware>();
