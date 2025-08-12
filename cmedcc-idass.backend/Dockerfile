@@ -6,22 +6,22 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["DevOpsSample/DevOpsSample.csproj", "DevOpsSample/"]
+COPY ["RBAC/cmedcc-idass.backend.csproj", "cmedcc-idass.backend/"]
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet restore "DevOpsSample/DevOpsSample.csproj"
+    dotnet restore "RBAC/cmedcc-idass.backend.csproj"
 
 COPY . .
-WORKDIR "/src/DevOpsSample"
+WORKDIR "/src/cmedcc-idass.backend"
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet build "DevOpsSample.csproj" -c $BUILD_CONFIGURATION -o /app/build
+    dotnet build "cmedcc-idass.backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet publish "DevOpsSample.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+    dotnet publish "cmedcc-idass.backend.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DevOpsSample.dll"]
+ENTRYPOINT ["dotnet", "cmedcc-idass.backend.dll"]
 
