@@ -54,7 +54,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowBlazorClient", policy =>
     {
-        policy.WithOrigins("*") // <-- Your Blazor WASM URL
+        policy.WithOrigins() // <-- Your Blazor WASM URL
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
