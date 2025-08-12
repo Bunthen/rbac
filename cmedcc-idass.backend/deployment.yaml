@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: PRE_DEFINE_APPLICATION_NAME
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: PRE_DEFINE_APPLICATION_NAME
+  template:
+    metadata:
+      labels:
+        app: PRE_DEFINE_APPLICATION_NAME
+    spec:
+      containers:
+        - name: PRE_DEFINE_APPLICATION_NAME
+          image: cmedcc.docker-image.deploy
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: DOTNET_SYSTEM_GLOBALIZATION_INVARIANT
+              value: "false"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+      imagePullSecrets:
+        - name: NEXUS_PULL_IMG_SECRETE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: PRE_DEFINE_APPLICATION_NAME-service
+  namespace: default
+spec:
+  selector:
+    app: PRE_DEFINE_APPLICATION_NAME
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
