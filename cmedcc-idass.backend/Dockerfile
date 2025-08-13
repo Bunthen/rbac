@@ -32,4 +32,4 @@ RUN --mount=type=cache,target=/root/.nuget/packages \
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "cmedcc-idass.backend.dll"]
+ENTRYPOINT ["dotnet", "cmedcc-idass-backend.dll"]
