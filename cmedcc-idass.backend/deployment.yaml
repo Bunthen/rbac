@@ -23,6 +23,8 @@ spec:
               value: "Production"
             - name: DOTNET_SYSTEM_GLOBALIZATION_INVARIANT
               value: "false"
+            - name: ASPNETCORE_URLS
+              value: "http://+:8080"   # 👈 Ensures Kestrel listens on port 8080
           resources:
             limits:
               cpu: "500m"
@@ -44,5 +46,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 8080   # 👈 Matches containerPort above
   type: ClusterIP
