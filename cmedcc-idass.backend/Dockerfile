@@ -31,6 +31,5 @@ RUN --mount=type=cache,target=/root/.nuget/packages \
 
 FROM base AS final
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://+:80
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "cmedcc-idass-backend.dll"]

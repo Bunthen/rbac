@@ -4,7 +4,7 @@ metadata:
   name: PRE_DEFINE_APPLICATION_NAME
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: PRE_DEFINE_APPLICATION_NAME
