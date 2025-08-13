@@ -49,7 +49,6 @@ public class AuthController : ControllerBase
 
 
     [HttpGet("logout")]
-    [Authorize]
     public async Task<IActionResult> LogoutUser()
     {
         return Ok(new { message = "Logout Successfully" });
