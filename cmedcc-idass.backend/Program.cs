@@ -70,12 +70,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseSwagger();
     app.UseDeveloperExceptionPage();
-    app.UsePathBase("/cmedcc-idass-backend");
 }
 //Middleware registering
 //app.UseMiddleware<ApiKeyMiddleware>();
 app.UseCors("AllowBlazorClient");  //this to diable cors
 app.MapGet("/", () => "Hello World!");
+app.UsePathBase("/cmedcc-idass-backend");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
