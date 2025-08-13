@@ -75,6 +75,7 @@ if (app.Environment.IsDevelopment())
 //Middleware registering
 //app.UseMiddleware<ApiKeyMiddleware>();
 app.UseCors("AllowBlazorClient");  //this to diable cors
+app.MapGet("/", () => "Hello World!");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
