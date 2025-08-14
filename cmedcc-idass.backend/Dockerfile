@@ -8,7 +8,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["cmedcc-idass.backend/cmedcc-idass.backend.csproj", "cmedcc-idass.backend/"]
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet restore "devtest/devtest.csproj"
+    dotnet restore "cmedcc-idass.backend/cmedcc-idass.backend.csproj"
 
 COPY . .
 WORKDIR "/src/cmedcc-idass.backend"
