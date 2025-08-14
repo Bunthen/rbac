@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cmedcc-idass.backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+069637fc3ae8601d626529711a920fe27e2b21e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+841f6f7c43031de6ddddc0d0c0e1abd7bf4441df")]
 [assembly: System.Reflection.AssemblyProductAttribute("cmedcc-idass.backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cmedcc-idass.backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

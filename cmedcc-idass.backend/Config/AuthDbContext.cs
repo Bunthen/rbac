@@ -8,6 +8,8 @@ namespace cmedcc_idass.backend.Config;
 public class AuthDbContext : IdentityDbContext
 {
     // The DbSet property for your User entity.
+    //define connection string
+
 
     // Constructor to configure the DbContext.
     public AuthDbContext(DbContextOptions<AuthDbContext> options)

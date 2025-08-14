@@ -16,9 +16,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //     options.UseSqlServer(connectionString));
-var connectionStringAuth =  builder.Configuration.GetConnectionString("AuthConnectionDev");
+
+//config for local run
+var connectionStringAuth = builder.Configuration.GetConnectionString("AuthConnectionDev");
+//Config for deployment
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(connectionStringAuth));
+
+
 // Add Identity service
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
