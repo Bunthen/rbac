@@ -17,7 +17,7 @@ spec:
         - name: PRE_DEFINE_APPLICATION_NAME
           image: cmedcc.docker-image.deploy
           ports:
-            - containerPort: 5161
+            - containerPort: 8080
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: "Production"
@@ -44,5 +44,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 5161
+      targetPort: 8080
   type: ClusterIP
