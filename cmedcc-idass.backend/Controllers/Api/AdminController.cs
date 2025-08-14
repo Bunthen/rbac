@@ -33,7 +33,7 @@ public class AdminController : ControllerBase
 
             return Created(result.UserName, "User created successfully.");
         }
-        catch (UserExistsException ex)
+        catch (AppException ex)
         {
             return Conflict("Expection Message From Service :" + ex.Message);
         }
@@ -60,7 +60,7 @@ public class AdminController : ControllerBase
 
             return Created(result.Name, "User created successfully.");
         }
-        catch (UserExistsException ex)
+        catch (AppException ex)
         {
             return Conflict("Expection Message From Service :" + ex.Message);
         }
@@ -87,7 +87,7 @@ public class AdminController : ControllerBase
 
             return Created(result.message, ":Secceed Message from service");
         }
-        catch (UserExistsException ex)
+        catch (AppException ex)
         {
             return Conflict("Expection Message From Service :" + ex.Message);
         }

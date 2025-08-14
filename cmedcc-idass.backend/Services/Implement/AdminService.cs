@@ -33,7 +33,7 @@ public class AdminService : IAdminService
         var result = await _userManager.CreateAsync(user, newUser.Password);
         if (!result.Succeeded)
         {
-            throw new UserExistsException(":" + result);
+            throw new AppException(":" + result);
         }
         return user;
     }
@@ -47,7 +47,7 @@ public class AdminService : IAdminService
         var result = await _roleManager.CreateAsync(role);
         if (!result.Succeeded)
         {
-            throw new UserExistsException(":" + result);
+            throw new AppException(":" + result);
         }
         return role;
     }
