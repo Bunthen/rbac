@@ -10,6 +10,9 @@ using cmedcc_idass.backend.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Testing add razor page
+
+builder.Services.AddRazorPages();
 
 // Add services to the container.
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -79,6 +82,15 @@ if (app.Environment.IsDevelopment())
 //Middleware registering
 //app.UseMiddleware<ApiKeyMiddleware>();
 app.UseCors("AllowBlazorClient");  //this to diable cors
+
+//Testing razor page login
+
+app.MapRazorPages();
+app.MapFallbackToPage("/Login");
+
+//en testing
+
+
 app.MapGet("/", () => "Hello World!");
 app.UsePathBase("/cmedcc-idass-backend");
 app.UseHttpsRedirection();

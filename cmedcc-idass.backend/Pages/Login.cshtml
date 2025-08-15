@@ -1,0 +1,130 @@
+@page
+@model LoginModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: white;
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            width: 350px;
+        }
+        h1 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #4f46e5;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+        input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 4px rgba(79, 70, 229, 0.5);
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4f46e5;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+        }
+        button:hover {
+            background-color: #4338ca;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="email" placeholder="Enter your email" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" placeholder="Enter your password" required />
+            </div>
+            <button type="submit">Login</button>
+
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="error-message">@Model.ErrorMessage</div>
+            }
+        </form>
+    </div>
+</body>
+</html>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        // Call your API controller
+        const response = await fetch('idass/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        // Parse JSON response
+        const result = await response.json();
+
+        if (result.isSuccess) {
+            // Store JWT token in localStorage (or sessionStorage)
+            localStorage.setItem("authToken", result.token);
+
+            // Redirect to home or protected page
+            window.location.href = "/home";
+        } else {
+            document.getElementById("errorMessage").innerText = "Invalid email or password";
+        }
+    } catch (err) {
+        console.error(err);
+        document.getElementById("errorMessage").innerText = "Server error, try again later";
+    }
+});
+</script>
