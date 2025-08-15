@@ -6,8 +6,7 @@ namespace cmedcc_idass.backend.Dto;
 
 public class UserRoleDto
 {
-    public Guid UserId { get; set; }
-    public Guid RoleId { get; set; }
+    public string UserId { get; set; }
     public string RoleName { get; set; }
     public string UserName { get; set; }
 }

@@ -33,7 +33,6 @@ public class AuthService : IAuthService
         if (user == null) return null;
         var checkpass = await _userManager.CheckPasswordAsync(user, loginDto.Password);
         if (!checkpass ) return null;
-        Console.WriteLine("Email confirmation :",user.EmailConfirmed);
         var roles = await _userManager.GetRolesAsync(user);
         var (token, expiration) = GenerateJwtToken(user, roles);
 
@@ -43,7 +42,6 @@ public class AuthService : IAuthService
             ExpiresAt = expiration,
             UserName = user.UserName,
         };
-        
         return response;
     }
     private (string Token, DateTime ExpiresAt) GenerateJwtToken(IdentityUser user, IList<string> roles)

@@ -76,6 +76,26 @@ public class AdminService : IAdminService
         return (true, $"Role '{UserRoleDto.RoleName}' assigned to user '{user.UserName}'");
     }
 
-
+    public async Task<List<UserRoleDto>> GetListUserWithRole(string UserName)
+    { 
+        var user = await _userManager.FindByNameAsync(UserName);
+        if (user == null)
+        {
+            return null;
+        }
+        var roles = await _userManager.GetRolesAsync(user);
+        var result = new List<UserRoleDto>();
+        foreach (var role in roles)
+        {
+            var userRole = new UserRoleDto
+            {
+                UserId = user.Id.ToString(),
+                RoleName = role.ToString(),
+                UserName = user.UserName,
+            };
+           result.Add(userRole);
+        }
+        return result;
+    }
 }
 

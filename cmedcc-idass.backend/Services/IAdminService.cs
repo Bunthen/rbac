@@ -24,6 +24,6 @@ public interface IAdminService
 
     Task<(bool success, string message)> AssignRoleToUser(AssignRoleToUserDto UserRoleDto);
     // Get list user with role
-    //Task<List<UserReadDto>> GetListUserWithRole(string UserId);
+    Task<List<UserRoleDto>> GetListUserWithRole(string UserName);
 }
 

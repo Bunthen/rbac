@@ -72,7 +72,6 @@ public class AdminController : ControllerBase
     }
 
     //Assign role to user
-    [Authorize(Roles = "Admin")]
     [HttpPost("role/assign")]
     public async Task<IActionResult> AssignRoleToUser([FromBody] AssignRoleToUserDto userRoleAssignDto)
     {
@@ -86,6 +85,33 @@ public class AdminController : ControllerBase
             var result = await _adminService.AssignRoleToUser(userRoleAssignDto);
 
             return Created(result.message, ":Secceed Message from service");
+        }
+        catch (AppException ex)
+        {
+            return Conflict("Expection Message From Service :" + ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Controller Exception Message : " + ex.Message);
+            return StatusCode(500, "An error occurred while register the role.");
+        }
+    }
+
+    //Get list user with role by user id
+    [Authorize(Roles = "Admin")]
+    [HttpGet("user/getRole")]
+    public async Task<IActionResult> GetListUserWithRole([FromBody] string UserName)
+    {
+        Console.WriteLine(UserName);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        try
+        {
+            Console.WriteLine("Get Role Controller : '" + UserName);
+            var result = await _adminService.GetListUserWithRole(UserName);
+            return Ok(result);
         }
         catch (AppException ex)
         {
