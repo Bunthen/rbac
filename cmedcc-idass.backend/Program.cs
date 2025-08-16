@@ -10,11 +10,6 @@ using cmedcc_idass.backend.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Testing add razor page
-
-builder.Services.AddRazorPages();
-builder.Services.AddHttpClient();
-builder.Services.AddSession();
 // Add services to the container.
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -86,9 +81,6 @@ app.UseCors("AllowFrontendClient");  //this to diable cors
 
 //Testing razor page login
 
-app.MapRazorPages();
-app.MapFallbackToPage("/Login");
-app.UseSession();
 //en testing
 
 
