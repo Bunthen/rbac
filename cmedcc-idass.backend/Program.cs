@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 //Testing add razor page
 
 builder.Services.AddRazorPages();
-
+builder.Services.AddHttpClient();
+builder.Services.AddSession();
 // Add services to the container.
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -60,9 +61,10 @@ builder.Services.AddControllers();
 ////ssss
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowBlazorClient", policy =>
+    options.AddPolicy("AllowFrontendClient", policy =>
     {
-        policy.WithOrigins() // <-- Your Blazor WASM URL
+        //policy.WithOrigins("http://localhost:4100","http://localhost:4200")
+        policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -80,14 +82,13 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 //Middleware registering
-//app.UseMiddleware<ApiKeyMiddleware>();
-app.UseCors("AllowBlazorClient");  //this to diable cors
+app.UseCors("AllowFrontendClient");  //this to diable cors
 
 //Testing razor page login
 
 app.MapRazorPages();
 app.MapFallbackToPage("/Login");
-
+app.UseSession();
 //en testing
 
 
@@ -96,4 +97,4 @@ app.UsePathBase("/cmedcc-idass-backend");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-await app.RunAsync();
+app.Run();

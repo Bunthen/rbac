@@ -10,6 +10,7 @@ using cmedcc_idass.backend.Config;
 using cmedcc_idass.backend.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace cmedcc_idass.backend.Controllers;
@@ -53,4 +54,6 @@ public class AuthController : ControllerBase
     {
         return Ok(new { message = "Logout Successfully" });
     }
+
+
 }

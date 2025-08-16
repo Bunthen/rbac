@@ -5,7 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
+using Microsoft.EntityFrameworkCore;
+using cmedcc_idass.backend.Models;
 
 namespace cmedcc_idass.backend.Services;
 
@@ -32,7 +33,7 @@ public class AuthService : IAuthService
         var user = await _userManager.FindByEmailAsync(loginDto.Email);
         if (user == null) return null;
         var checkpass = await _userManager.CheckPasswordAsync(user, loginDto.Password);
-        if (!checkpass ) return null;
+        if (!checkpass) return null;
         var roles = await _userManager.GetRolesAsync(user);
         var (token, expiration) = GenerateJwtToken(user, roles);
 
@@ -69,4 +70,57 @@ public class AuthService : IAuthService
         return (new JwtSecurityTokenHandler().WriteToken(token), expires);
     }
 
+    // public async Task<TokenResponse> RefreshTokenAsync(string refreshToken)
+    // {
+    //     var user = await _userManager.Users
+    //         .Include(u => u.RefreshTokens)
+    //         .FirstOrDefaultAsync(u => u.RefreshTokens.Any(t => t.Token == refreshToken));
+    //     if (user == null)
+    //         return null;
+
+    //     var storedToken = user.RefreshTokens.Single(x => x.Token == refreshToken);
+
+    //     if (storedToken.IsUsed || storedToken.IsRevoked || storedToken.Expires < DateTime.UtcNow)
+    //         return null;
+
+    //     // Mark old refresh token as used
+    //     storedToken.IsUsed = true;
+
+    //     // Generate new tokens
+    //     var newAccessToken = await GenerateAccessTokenAsync(user);
+    //     var newRefreshToken = GenerateRefreshToken();
+
+    //     user.RefreshTokens.Add(new RefreshToken
+    //     {
+    //         Token = newRefreshToken,
+    //         Expires = DateTime.UtcNow.AddDays(7),
+    //         Created = DateTime.UtcNow
+    //     });
+
+    //     await _dbContext.SaveChangesAsync();
+
+    //     return new TokenResponse
+    //     {
+    //         AccessToken = newAccessToken,
+    //         RefreshToken = newRefreshToken
+    //     };
+    // }
+
+    private async Task<string> GenerateAccessTokenAsync(IdentityUser user)
+    {
+        var roles = await _userManager.GetRolesAsync(user);
+        var (token, _) = GenerateJwtToken(user, roles);
+        return token;
+    }
+
+    private string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[32];
+        using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
+        }
+    }
 }
+
