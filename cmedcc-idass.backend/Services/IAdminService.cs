@@ -4,12 +4,12 @@ using cmedcc_idass.backend.Dto;
 // using cmedcc_idass.backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration.UserSecrets;
-
+using cmedcc_idass.backend.Models;
 namespace cmedcc_idass.backend.Services;
 
 public interface IAdminService
 {
-    Task<IdentityUser> RegisterUser(RegisterUserDto newUser);
+    Task<ApplicationUser> RegisterUser(RegisterUserDto newUser);
     // Task<IdentityUser> UpdateUserById(Guid userId, UserUpdateDto userDto);
     // Task<IdentityUser> DeleteUserById(Guid userId);
     // Task<UserUpdateDto> GetUserById(Guid userId);

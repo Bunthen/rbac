@@ -13,12 +13,12 @@ namespace cmedcc_idass.backend.Services;
 public class AuthService : IAuthService
 {
     private readonly AuthDbContext _dbContext;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly IConfiguration _config;
 
     public AuthService(
         AuthDbContext dbContext,
-        UserManager<IdentityUser> userManager,
+        UserManager<ApplicationUser> userManager,
         IConfiguration config
         )
     {
@@ -106,7 +106,7 @@ public class AuthService : IAuthService
     //     };
     // }
 
-    private async Task<string> GenerateAccessTokenAsync(IdentityUser user)
+    private async Task<string> GenerateAccessTokenAsync(ApplicationUser user)
     {
         var roles = await _userManager.GetRolesAsync(user);
         var (token, _) = GenerateJwtToken(user, roles);

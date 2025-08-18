@@ -18,7 +18,6 @@ public class AdminController : ControllerBase
         _adminService = adminService;
     }
     //Regiter new user
-    [Authorize(Roles = "Admin")]
     [HttpPost("user/register")]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto NewUser)
     {
@@ -45,7 +44,6 @@ public class AdminController : ControllerBase
     }
 
     //Register new rolder
-    [Authorize(Roles = "Admin")]
     [HttpPost("role/register")]
     public async Task<IActionResult> RoleRegistering([FromBody] RegisterRoleDto roleDto)
     {
@@ -98,7 +96,6 @@ public class AdminController : ControllerBase
     }
 
     //Get list user with role by user id
-    [Authorize(Roles = "Admin")]
     [HttpGet("user/getRole")]
     public async Task<IActionResult> GetListUserWithRole([FromBody] string UserName)
     {
@@ -123,4 +120,6 @@ public class AdminController : ControllerBase
             return StatusCode(500, "An error occurred while register the role.");
         }
     }
+
+    
 }

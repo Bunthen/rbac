@@ -3,6 +3,8 @@ using cmedcc_idass.backend.Dto;
 using Microsoft.AspNetCore.Identity;
 using cmedcc_idass.backend.Exceptions;
 using Microsoft.AspNetCore.Http.HttpResults;
+using cmedcc_idass.backend.Models;
+
 // using cmedcc_idass.backend.Models;
 
 namespace cmedcc_idass.backend.Services;
@@ -10,11 +12,11 @@ namespace cmedcc_idass.backend.Services;
 public class AdminService : IAdminService
 {
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     public AdminService(
         RoleManager<IdentityRole> roleManager,
-        UserManager<IdentityUser> userManager
+        UserManager<ApplicationUser> userManager
     )
     {
         _roleManager = roleManager;
@@ -22,9 +24,9 @@ public class AdminService : IAdminService
     }
 
     //Register new user
-    public async Task<IdentityUser> RegisterUser(RegisterUserDto newUser)
+    public async Task<ApplicationUser> RegisterUser(RegisterUserDto newUser)
     {
-        var user = new IdentityUser
+        var user = new ApplicationUser
         {
             UserName = newUser.UserName,
             Email = newUser.Email,
