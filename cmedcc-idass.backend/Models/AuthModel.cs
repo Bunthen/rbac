@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +10,7 @@ public class TokenRequest
     public string RefreshToken { get; set; }
 }
 
-public class RefreshToken
+public class RefreshTokens
 {
     public int Id { get; set; } // Primary key
     public string Token { get; set; } // The actual refresh token string
@@ -18,9 +19,5 @@ public class RefreshToken
     public DateTime ExpiryDate { get; set; }
     public bool IsUsed { get; set; } // Has the token been used?
     public bool IsRevoked { get; set; } // Has the token been explicitly revoked?
-
-    // Foreign key to link the refresh token to a specific user
     public string UserId { get; set; }
-    [ForeignKey(nameof(UserId))]
-    public IdentityUser User { get; set; }
 }

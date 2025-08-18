@@ -5,8 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 using cmedcc_idass.backend.Models;
+using cmedcc_idass.backend.Exceptions;
 
 namespace cmedcc_idass.backend.Services;
 
@@ -70,41 +70,16 @@ public class AuthService : IAuthService
         return (new JwtSecurityTokenHandler().WriteToken(token), expires);
     }
 
-    // public async Task<TokenResponse> RefreshTokenAsync(string refreshToken)
-    // {
-    //     var user = await _userManager.Users
-    //         .Include(u => u.RefreshTokens)
-    //         .FirstOrDefaultAsync(u => u.RefreshTokens.Any(t => t.Token == refreshToken));
-    //     if (user == null)
-    //         return null;
+    public async Task<TokenResponseDto> RefreshTokenAsync(string UserId,string refreshToken)
+    {
+        //Find a user
+        var user = await _userManager.FindByIdAsync(UserId);
 
-    //     var storedToken = user.RefreshTokens.Single(x => x.Token == refreshToken);
-
-    //     if (storedToken.IsUsed || storedToken.IsRevoked || storedToken.Expires < DateTime.UtcNow)
-    //         return null;
-
-    //     // Mark old refresh token as used
-    //     storedToken.IsUsed = true;
-
-    //     // Generate new tokens
-    //     var newAccessToken = await GenerateAccessTokenAsync(user);
-    //     var newRefreshToken = GenerateRefreshToken();
-
-    //     user.RefreshTokens.Add(new RefreshToken
-    //     {
-    //         Token = newRefreshToken,
-    //         Expires = DateTime.UtcNow.AddDays(7),
-    //         Created = DateTime.UtcNow
-    //     });
-
-    //     await _dbContext.SaveChangesAsync();
-
-    //     return new TokenResponse
-    //     {
-    //         AccessToken = newAccessToken,
-    //         RefreshToken = newRefreshToken
-    //     };
-    // }
+        if (user == null)
+            throw new AppException("User not found");
+        // 2. Find and validate the refresh token in the database
+  
+    }
 
     private async Task<string> GenerateAccessTokenAsync(ApplicationUser user)
     {
