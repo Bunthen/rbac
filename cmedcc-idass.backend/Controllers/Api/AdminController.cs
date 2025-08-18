@@ -109,7 +109,7 @@ public class AdminController : ControllerBase
         }
         try
         {
-            Console.WriteLine("Get Role Controller : '" + UserName);
+            Console.WriteLine("Get Role Controller : " + UserName);
             var result = await _adminService.GetListUserWithRole(UserName);
             return Ok(result);
         }

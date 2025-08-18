@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using System;
 namespace cmedcc_idass.backend.Pages;
 
 
