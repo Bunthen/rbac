@@ -2,16 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using cmedcc_idass.backend.Services;
-using cmedcc_idass.backend.Dto;
-using cmedcc_idass.backend.Config;
-// using cmedcc_idass.backend.Models;
-
-using cmedcc_idass.backend.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using System.Security.Claims;
+// using cmedcc_idass.backend.Models;
 
+using cmedcc_idass.backend.Exceptions;
+using cmedcc_idass.backend.Services;
+using cmedcc_idass.backend.Dto;
+using cmedcc_idass.backend.Config;
 
 namespace cmedcc_idass.backend.Controllers;
 
@@ -47,13 +47,55 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials." + ex.Message);
         }
     }
+    [HttpPost("logins")]
+    public async Task<IActionResult> LoginUsers([FromBody] LoginDto loginDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        try
+        {
+            var tokenResponse = await _authService.LoginUsers(loginDto);
+            return Ok(tokenResponse);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Controller : '" + ex.Message);
+            return Unauthorized("Invalid credentials." + ex.Message);
+        }
+    }
 
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] TokenRequest tokenRequest)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        try
+        {
+            var tokens = await _authService.RefreshTokenAsync(tokenRequest.UseName, tokenRequest.RefreshToken);
+            return Ok(tokens);
+        }
+        catch (AppException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Controller : '" + ex.Message);
+            return Unauthorized("Invalid credentials." + ex.Message);
+        }
+    }
 
     [HttpGet("logout")]
     public async Task<IActionResult> LogoutUser()
     {
         return Ok(new { message = "Logout Successfully" });
     }
+    
+    
 
 
 }

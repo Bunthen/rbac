@@ -10,6 +10,7 @@ namespace cmedcc_idass.backend.Services;
 public interface IAuthService
 {
     Task<JwtTokenResponseDto> LoginUser(LoginDto loginDto);
+    Task<TokenResponseDto> LoginUsers(LoginDto loginDto);
     Task<TokenResponseDto> RefreshTokenAsync(string UserId, string refreshToken);
 }
 

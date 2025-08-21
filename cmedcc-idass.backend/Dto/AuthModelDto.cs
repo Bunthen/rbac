@@ -34,10 +34,12 @@ namespace cmedcc_idass.backend.Dto
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
-        public DateTime ExpiresAt { get; set; }
+        public DateTime Expiration { get; set; }
     }
     public class TokenRequest
     {
         public string RefreshToken { get; set; }
+        public string UseName { get; set; }
+    
     }
 }

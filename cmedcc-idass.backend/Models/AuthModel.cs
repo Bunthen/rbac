@@ -21,3 +21,10 @@ public class RefreshTokens
     public bool IsRevoked { get; set; } // Has the token been explicitly revoked?
     public string UserId { get; set; }
 }
+
+public class TokenResponse
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+    public DateTime Expiration { get; set; }
+}
